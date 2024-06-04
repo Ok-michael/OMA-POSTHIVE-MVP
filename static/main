@@ -12,18 +12,24 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #e0e0e0; /* Lighter steel tone (can adjust if needed) */
 }
 
-/* Darker green navigation bar (previous version) */
+/* Less dark green background for header content */
 .site-header {
-  background-color: #19A94A; /* Darker green for the entire header */
+  background-color: #388E3C; /* Less dark green for the entire header */
   padding: 10px 20px;
   border: none; /* Remove border */
 }
 
+.site-header .navbar-nav {
+  /* Removed background color for navbar links container */
+  border-radius: 3px; /* Subtle rounded corners */
+  padding: 5px 10px; /* Adjust padding for spacing */
+}
+
 .site-header .navbar-nav .nav-link {
-  color: #f8f3f0; /* Light cream color for navbar links */
+  /* Inherit green color from the header */
+  color: inherit; /* Inherits the green color from .site-header */
   font-weight: bold; /* Make links stand out */
   font-size: 1rem; /* Smaller font size */
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
   margin-right: 15px; /* Add spacing between links */
 }
 
@@ -90,17 +96,11 @@ a.article-title:hover {
   font-size: 2.5rem; /* Maintain font size */
 }
 
-/* Special for PostHive branding */
+/* Special for PostHive branding (green color) */
 .site-header .navbar-brand {
   font-weight: bold;
   font-size: 1.2rem; /* Slightly larger font */
   color: #25D366; /* Green for PostHive */
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
-}
-
-/* Washed out orange for navbar links (adjust as needed) */
-.site-header .navbar-nav .nav-link {
-  color: #f8f3f0; /* Base color (adjust hue for orange) */
-  text-shadow: 0 0 1px rgba(255, 243, 240, 0.8); /* Washed out effect */
 }
 

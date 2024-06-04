@@ -17,6 +17,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #19A94A; /* Darker green for the entire header */
   padding: 10px 20px;
   border: none; /* Remove border */
+  opacity: 0.75
 }
 
 .site-header .navbar-nav .nav-link {
