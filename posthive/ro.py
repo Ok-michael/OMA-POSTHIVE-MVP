@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-from flask import Flask, render_template, flash, redirect
-from forms import RegistrationForm, LoginForm
-app = Flask('__name__')
-
-app.config['SECRET_KEY'] = 'db86aff78e3b5089b0ddbfd20d9d14ae'
-
+from flask import render_template, flash, redirect, url_for
+from posthive import app
+from posthive.forms import RegistrationForm, LoginForm
+from posthive.models import User, Post
 posts = [
     {
         'author': 'Michael Oko',
@@ -18,7 +16,6 @@ posts = [
         'content': 'Just a dummy for the second_post',
         'date_posted': 'June 3, 2024'
     },
-    
     {
         'author': 'Sylvanus Oko',
         'title': 'third_post',
@@ -55,7 +52,3 @@ def login():
             flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
 
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
