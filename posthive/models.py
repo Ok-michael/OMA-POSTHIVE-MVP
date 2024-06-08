@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from posthive import db
+from posthive import db, login_manager
+from flask_login import UserMixin
 
-class User(db.Model):
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+class User(db.Model, UserMixin):
     """This class represents the Users and holds all the relevant attributes
     our user must have to be stored in the database
 
@@ -20,7 +26,22 @@ class User(db.Model):
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
+    """
+    @property
+    def is_authenticated(self):
+        return True
 
+    @property
+    def is_anonymous(self):
+        return False
+  
+    @property
+    def is_active(self):
+        return True  # Or your custom logic
+
+    def get_id(self):
+        return str(self.id)
+    """
     def __repr__(self):
         """ this class represents a the class in a nicely formatted string
 
