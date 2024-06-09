@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from flask import request, render_template, flash, redirect, url_for
 from posthive import app, db, bcrypt
-from posthive.forms import RegistrationForm, LoginForm
+from posthive.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from posthive.models import User, Post
 from flask_login import login_user, logout_user, current_user, login_required
 
@@ -68,10 +68,23 @@ def login():
         flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('login.html', title='Login', form=form)
 
-@app.route('/account')
+@app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
-  return render_template('account.html', title='account')
+  form = UpdateAccountForm()
+  if form.validate_on_submit():
+      current_user.username = form.username.data
+      current_user.email = form.email.data
+      db.session.commit()
+      flash('Account has been update', 'success')
+      return redirect(url_for('account'))
+  elif request.method == 'GET':
+      form.username.data = current_user.username
+      form.email.data = current_user.email
+  image_file = url_for('static', 
+    filename='profile_pics/' + current_user.image_file)
+  return render_template('account.html', 
+        title='account', image_file=image_file, form=form)
 
 @app.route('/logout')
 def logout():
