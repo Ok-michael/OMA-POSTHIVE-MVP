@@ -2,7 +2,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, EmailField, BooleanField, SubmitField
+from wtforms import StringField, TextAreaField, PasswordField, EmailField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Length, ValidationError, EqualTo, Email
 from posthive.models import User
 
@@ -29,6 +29,8 @@ class RegistrationForm(FlaskForm):
 class UpdateAccountForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
     email = EmailField('Email', validators=[DataRequired(), Email()])
+    picture = FileField(
+        'update Pic', validators=[FileAllowed(['jpg','png'])])
     submit = SubmitField('Update')
 
     def validate_username(self, username):
@@ -49,3 +51,10 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
+class PostForm(FlaskForm):
+    title = StringField('Title',
+            validators=[DataRequired()])
+    content = TextAreaField('Content',
+            validators=[DataRequired()])
+    submit = SubmitField('Submit Post')
