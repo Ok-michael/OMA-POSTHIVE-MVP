@@ -20,7 +20,7 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0.75;
 }
 
-.site-header .navbar-nav .nav-link {
+.site-header .navbar-nav .nav-link .navbar-brand {
   color: #f8f3f0; /* Light cream color for navbar links */
   font-weight: bold; /* Make links stand out */
   font-size: 1rem; /* Smaller font size */
